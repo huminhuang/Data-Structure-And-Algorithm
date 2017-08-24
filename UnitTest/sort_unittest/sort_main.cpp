@@ -1,4 +1,4 @@
-#include <vld.h>
+//#include <vld.h>
 #include <random>
 #include <iostream>
 #include <windows.h>
@@ -7,10 +7,11 @@
 using namespace std;
 using namespace std::chrono;
 
-#include "SelectSort.hpp"
 #include "BubbleSort.hpp"
+#include "QuickSort.hpp"
+#include "SelectSort.hpp"
 
-#define RANDOM_COUNT 100000 // 随机数数量	
+#define RANDOM_COUNT 10000000 // 随机数数量	
 
 class CRandomHandler
 {
@@ -59,32 +60,37 @@ private:
 /*
 	测试时间消耗
 */
-void testSpeed(std::function<void(ULONG num[], size_t len)>&& task, const char* message)
+void testSpeed(std::function<void()>&& task, const char* message)
 {
-	CRandomHandler* rd = CRandomHandler::Get();
+	time_point<high_resolution_clock> begin = high_resolution_clock::now();
 
-	ULONG* num = new ULONG[rd->len()];
-	rd->copy(num, rd->len());
+	task();
 
-	{
-		time_point<high_resolution_clock> begin = high_resolution_clock::now();
+	int64_t time = duration_cast<chrono::milliseconds>(high_resolution_clock::now() - begin).count();
 
-		task(num, rd->len());
-
-		int64_t time = duration_cast<chrono::milliseconds>(high_resolution_clock::now() - begin).count();
-
-		cout << "[ " << message << " 消耗时间] " << time << "ms" << endl;
-	}
-	
-	delete[] num;
-	num = nullptr;
+	cout << "[ " << message << " 消耗时间] " << time << "ms" << endl;
 }
 
 int main()
 {		
+	cout << "[ -------------开始测试排序性能-------------- ]" << endl << endl;
 
-	testSpeed([](ULONG num[], size_t len){ BubbleSort<ULONG>(num, len); }, "BubbleSort");
-	testSpeed([](ULONG num[], size_t len){ SelectSort<ULONG>(num, len); }, "SelectSort");
+	CRandomHandler* rd = CRandomHandler::Get();
+
+	ULONG* num = new ULONG[rd->len()];
+
+	rd->copy(num, rd->len());
+	testSpeed([&]{ QuickSort(num, 0, rd->len() - 1); }, "QuickSort");
+	rd->copy(num, rd->len());
+	testSpeed([&]{ BubbleSort(num, rd->len()); }, "BubbleSort");
+	rd->copy(num, rd->len());
+	testSpeed([&]{ SelectSort(num, rd->len()); }, "SelectSort");
+
+
+	delete[] num;
+	num = nullptr;
+
+	cout << endl << "[ -------------性能测试完毕-------------- ]" << endl;
 
 	getchar();
 

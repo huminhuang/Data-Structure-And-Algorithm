@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\sort\QuickSort.hpp" />
     <ClCompile Include="sort_main.cpp" />
   </ItemGroup>
   <ItemGroup>
