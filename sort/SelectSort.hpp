@@ -1,15 +1,8 @@
 
 /*
-*	说明：选择排序(升序)
+*	璇存槑锛氶�夋嫨鎺掑簭(鍗囧簭)
 */
 
-/*
-	3,1,3,2,1,4
-	1,3,3,2,1,4
-	1,2,3,3,1,4
-	1,1,3,3,2,4
-	1,1,2,3,3,4
-*/
 template<typename T>
 void SelectSort(T arr[], size_t len)
 {
@@ -20,7 +13,7 @@ void SelectSort(T arr[], size_t len)
 		min = i;
 		for (size_t j = i + 1; j < len; j++)
 		{
-			if (arr[min] > arr[j])	// 升序排列
+			if (arr[min] > arr[j])	// 鍗囧簭
 			{
 				min = j;
 			}
