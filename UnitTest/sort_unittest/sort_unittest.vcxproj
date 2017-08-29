@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\sort\BubbleSort.hpp" />
+    <ClInclude Include="..\..\sort\CountSort.hpp" />
     <ClInclude Include="..\..\sort\SelectSort.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

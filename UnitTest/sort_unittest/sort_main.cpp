@@ -1,4 +1,4 @@
-//#include <vld.h>
+#include <vld.h>
 #include <random>
 #include <iostream>
 #include <windows.h>
@@ -10,8 +10,9 @@ using namespace std::chrono;
 #include "BubbleSort.hpp"
 #include "QuickSort.hpp"
 #include "SelectSort.hpp"
+#include "CountSort.hpp"
 
-#define RANDOM_COUNT 10000000 // 随机数数量	
+#define RANDOM_COUNT 1000 // 随机数数量	
 
 class CRandomHandler
 {
@@ -25,14 +26,14 @@ public:
 	CRandomHandler(size_t len)
 	{
 		m_len = len;
-		m_num = new ULONG[len];
-		memset(m_num, 0, len * sizeof(ULONG));
+		m_num = new LONG[len];
+		memset(m_num, 0, len * sizeof(LONG));
 
 		// 产生随机数
-		std::random_device rd;
+		srand((unsigned)time(0));
 		for (size_t i = 0; i < len; i++)
 		{
-			m_num[i] = rd();
+			m_num[i] = rand() % len;
 		}
 	}
 
@@ -42,9 +43,9 @@ public:
 		m_num = nullptr;
 	}
 
-	void copy(ULONG* _other, size_t _len)
+	void copy(LONG* _other, size_t _len)
 	{
-		memcpy_s(_other, _len * sizeof(ULONG), m_num, m_len * sizeof(ULONG));
+		memcpy_s(_other, _len * sizeof(LONG), m_num, m_len * sizeof(LONG));
 	}
 
 	size_t len() const
@@ -53,7 +54,7 @@ public:
 	}
 
 private:
-	ULONG*	m_num;
+	LONG*	m_num;
 	size_t	m_len;
 };
 
@@ -77,14 +78,12 @@ int main()
 
 	CRandomHandler* rd = CRandomHandler::Get();
 
-	ULONG* num = new ULONG[rd->len()];
+	LONG* num = new LONG[rd->len()];
 
-	rd->copy(num, rd->len());
-	testSpeed([&]{ QuickSort(num, 0, rd->len() - 1); }, "QuickSort");
-	rd->copy(num, rd->len());
-	testSpeed([&]{ BubbleSort(num, rd->len()); }, "BubbleSort");
-	rd->copy(num, rd->len());
-	testSpeed([&]{ SelectSort(num, rd->len()); }, "SelectSort");
+	rd->copy(num, rd->len()); testSpeed([&] { CountSort(num, rd->len()); }, "CountSort");
+	rd->copy(num, rd->len()); testSpeed([&] { QuickSort(num, 0, rd->len() - 1); }, "QuickSort");
+	rd->copy(num, rd->len()); testSpeed([&] { BubbleSort(num, rd->len()); }, "BubbleSort");
+	rd->copy(num, rd->len()); testSpeed([&] { SelectSort(num, rd->len()); }, "SelectSort");
 
 
 	delete[] num;

@@ -1,7 +1,3 @@
-/*
-*	说明：快速排序(升序)
-*/
-
 template<typename T>
 void QuickSort(T arr[], long left, long right)
 {
