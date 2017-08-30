@@ -9,13 +9,11 @@
 template<typename T>
 void CountSort(T arr[], size_t len)
 {
-	size_t i, j = 0;
+	T *crr, max = arr[0];
 
-	T max, *crr;
-
-	for (i = 0, max = arr[0]; i < len; i++)
+	for (size_t i = 0; i < len; i++)
 	{
-		if (max < arr[i])
+		if (arr[i] > max)
 		{
 			max = arr[i];
 		}
@@ -24,16 +22,16 @@ void CountSort(T arr[], size_t len)
 	crr = new T[max + 1];
 
 	// 数组crr各元素置0
-	memset(crr, 0, sizeof(T) * max);
+	memset(crr, 0, sizeof(T)* (max + 1));
 
 	// 统计数组arr中每个元素重复出现的个数
-	for (i = 0; i < len; i++)
+	for (size_t i = 0; i < len; i++)
 	{
 		crr[arr[i]]++;
 	}
 
 	// 根据crr[i]的大小，将元素i放入arr适当的位置
-	for (T i = 0; i <= max; i++)
+	for (T i = 0, j = 0; i <= max; i++)
 	{
 		while ((crr[i]--) > 0)
 		{

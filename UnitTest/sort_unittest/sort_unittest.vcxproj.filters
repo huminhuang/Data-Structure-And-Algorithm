@@ -1,36 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="源文件">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="资源文件">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="sort">
+      <UniqueIdentifier>{df669246-0757-484a-9a11-f480f648a9e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{919b0f17-ed05-4165-a495-7dcc27821e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{11af875c-8087-4acb-abc7-7951e4e921a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sort_main.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="..\..\sort\BasicSort.cpp">
+      <Filter>sort</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\sort\QuickSort.hpp">
-      <Filter>头文件</Filter>
+    <ClCompile Include="sort_unittest.cpp">
+      <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\sort\BubbleSort.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\sort\SelectSort.hpp">
-      <Filter>头文件</Filter>
+      <Filter>sort</Filter>
     </ClInclude>
     <ClInclude Include="..\..\sort\CountSort.hpp">
-      <Filter>头文件</Filter>
+      <Filter>sort</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sort\QuickSort.hpp">
+      <Filter>sort</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sort\SelectSort.hpp">
+      <Filter>sort</Filter>
+    </ClInclude>
+    <ClInclude Include="catch.hpp">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="random.hpp">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
